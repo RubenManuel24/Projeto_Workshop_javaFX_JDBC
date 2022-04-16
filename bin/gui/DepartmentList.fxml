@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="401.0" prefWidth="529.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DepartmentListController">
+<VBox prefHeight="679.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DepartmentListController">
    <children>
       <Label prefHeight="39.0" prefWidth="197.0" text="Department Registration">
          <font>
@@ -27,7 +27,7 @@
           <Button fx:id="btNew" mnemonicParsing="false" onAction="#onBtNewAction" text="Button" />
         </items>
       </ToolBar>
-      <TableView fx:id="tableViewDepartment">
+      <TableView fx:id="tableViewDepartment" prefHeight="375.0" prefWidth="1004.0">
         <columns>
           <TableColumn fx:id="tableColumId" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="tableColumName" prefWidth="75.0" text="Name" />
