@@ -31,7 +31,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 				"SELECT * FROM department WHERE Id = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
-			if (rs.next()) {
+			if (rs.next() == true) {
 				Department obj = new Department();
 				obj.setId(rs.getInt("Id"));
 				obj.setName(rs.getString("Name"));
@@ -59,7 +59,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
 			List<Department> list = new ArrayList<>();
 
-			while (rs.next()) {
+			while (rs.next() == true) {
 				Department obj = new Department();
 				obj.setId(rs.getInt("Id"));
 				obj.setName(rs.getString("Name"));
