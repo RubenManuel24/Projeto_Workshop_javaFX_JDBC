@@ -1,8 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +22,8 @@ public class DepartmentFromController implements Initializable{
 	private Department entity;
 	
 	private DepartmentService service;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private Label erroLabel;
@@ -42,11 +48,27 @@ public class DepartmentFromController implements Initializable{
 		if(service == null) {
 			throw new IllegalStateException("Service was null");
 		}
+		try {
+			
 		entity = getFormatDate();
 		service.saveOrUpdata(entity);
+		notifyDataChangeListerners();
 		Utils.currentStage(event).close();
+		
+		}
+		catch(DbException e){
+			e.getMessage();
+		}
+		
 	}
 	
+	private void notifyDataChangeListerners() {
+		for(DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
+		}
+		
+	}
+
 	private Department getFormatDate() {
 		Department obj = new Department();
 		
@@ -61,6 +83,10 @@ public class DepartmentFromController implements Initializable{
 	}
 	public void setDepartmentService(DepartmentService service) {
 		this.service=service;
+	}
+	
+	public void subscribeDataChangeListeners(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
 	}
 	
 	@FXML
