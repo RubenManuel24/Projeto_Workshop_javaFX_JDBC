@@ -35,7 +35,7 @@
             <TextField fx:id="txtName" prefHeight="24.0" prefWidth="166.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="btSave" mnemonicParsing="false" onAction="#onButtonSave" text="Save" textFill="#171717">
+                  <Button fx:id="btSave" mnemonicParsing="false" onAction="#onButtonSaveAction" text="Save" textFill="#171717">
                      <effect>
                         <Lighting>
                            <bumpInput>
@@ -73,7 +73,7 @@
                      </cursor></Button>
                </children>
             </HBox>
-            <Label fx:id="erroLabel" prefHeight="21.0" prefWidth="74.0" textFill="#fc0c0cf2" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label fx:id="erroLabel" prefHeight="21.0" prefWidth="128.0" textFill="#e80808f2" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="Times New Roman Bold" size="13.0" />
                </font>
