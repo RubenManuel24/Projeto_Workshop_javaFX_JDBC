@@ -94,8 +94,8 @@ public class DepartmentFromController implements Initializable{
 		return obj;
 	}
 	
-	public void setDepartment(Department entity) {
-		this.entity=entity;
+	public void setDepartment(Department department) {
+		this.entity=department;
 	}
 	public void setDepartmentService(DepartmentService service) {
 		this.service=service;
@@ -104,7 +104,6 @@ public class DepartmentFromController implements Initializable{
 	public void subscribeDataChangeListeners(DataChangeListener listener) {
 		dataChangeListeners.add(listener);
 	}
-	
 	@FXML
 	public void onButtonCancel(ActionEvent event) {
 		Utils.currentStage(event).close();

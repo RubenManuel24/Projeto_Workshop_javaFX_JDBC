@@ -13,6 +13,7 @@ public class DepartmentService {
 	public List<Department> findAll() {
 
 		return dao.findAll();
+		
 
 	}
 
