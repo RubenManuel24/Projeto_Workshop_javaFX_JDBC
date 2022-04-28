@@ -86,33 +86,33 @@ public class SellerListController implements Initializable, DataChangeListener {
 		List<Seller> list = service.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		tableViewSeller.setItems(obsList);
-		//initEditButtons();
-        //initRemoveButtons();
+		initEditButtons();
+        initRemoveButtons();
 	}
 
 	public void createDialogFrom(Seller obj, String absoluteName, Stage prentStage) {
 
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			Pane pane = loader.load();
-
-			SellerFromController controller = loader.getController();
-			controller.setSeller(obj);
-			controller.subscribeDataChangeListeners(this);
-			controller.setSellerService(new SellerService());
-			controller.updateFormData();
-
-			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Enter Seller data");
-			dialogStage.setScene(new Scene(pane));
-			dialogStage.setResizable(false);
-			dialogStage.initOwner(prentStage);
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.showAndWait();
-
-		} catch (Exception e) {
-			e.getMessage();
-		}
+//		try {
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+//			Pane pane = loader.load();
+//
+//			SellerFromController controller = loader.getController();
+//			controller.setSeller(obj);
+//			controller.subscribeDataChangeListeners(this);
+//			controller.setSellerService(new SellerService());
+//			controller.updateFormData();
+//
+//			Stage dialogStage = new Stage();
+//			dialogStage.setTitle("Enter Seller data");
+//			dialogStage.setScene(new Scene(pane));
+//			dialogStage.setResizable(false);
+//			dialogStage.initOwner(prentStage);
+//			dialogStage.initModality(Modality.WINDOW_MODAL);
+//			dialogStage.showAndWait();
+//
+//		} catch (Exception e) {
+//			e.getMessage();
+//		}
 
 	}
 
@@ -122,7 +122,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	}
 
-	/*private void initEditButtons() {
+	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<Seller, Seller>() {
 			private final Button button = new Button("edit");
@@ -142,7 +142,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 			}
 
 		});
-	}*/
+	}
 
 	private void initRemoveButtons() {
 		tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
