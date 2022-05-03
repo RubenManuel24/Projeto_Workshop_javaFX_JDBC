@@ -1,4 +1,4 @@
-package model.entities;
+package model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import db.DB;
 import db.DbException;
 import db.DbIntegrityException;
 import model.dao.DepartmentDao;
+import model.entities.Department;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 

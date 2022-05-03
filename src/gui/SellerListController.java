@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -28,6 +29,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Seller;
+import model.services.DepartmentService;
 import model.services.SellerService;
 
 public class SellerListController implements Initializable, DataChangeListener {
@@ -44,10 +46,21 @@ public class SellerListController implements Initializable, DataChangeListener {
 	private TableColumn<Seller, String> tableColumName;
 
 	@FXML
+	private TableColumn<Seller, String> tableColumnEmail;
+	
+	@FXML
+	private TableColumn<Seller, Date> tableColumnBirthDate;
+	
+	@FXML
+	private TableColumn<Seller, Double> tableColumnBaseSalary;
+	
+	@FXML
 	private TableColumn<Seller, Seller> tableColumnEDIT;
 
 	@FXML
 	private TableColumn<Seller, Seller> tableColumnREMOVE;
+	
+	
 
 	@FXML
 	private Button btNew;
@@ -76,6 +89,11 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 		tableColumId.setCellValueFactory(new PropertyValueFactory<>("Id"));
 		tableColumName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+		tableColumnEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+		tableColumnBirthDate.setCellValueFactory(new PropertyValueFactory<>("BirthDate"));
+		Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
+		tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("BaseSalary"));
+		Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);
 
 	}
 
@@ -92,27 +110,28 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	public void createDialogFrom(Seller obj, String absoluteName, Stage prentStage) {
 
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//			Pane pane = loader.load();
-//
-//			SellerFromController controller = loader.getController();
-//			controller.setSeller(obj);
-//			controller.subscribeDataChangeListeners(this);
-//			controller.setSellerService(new SellerService());
-//			controller.updateFormData();
-//
-//			Stage dialogStage = new Stage();
-//			dialogStage.setTitle("Enter Seller data");
-//			dialogStage.setScene(new Scene(pane));
-//			dialogStage.setResizable(false);
-//			dialogStage.initOwner(prentStage);
-//			dialogStage.initModality(Modality.WINDOW_MODAL);
-//			dialogStage.showAndWait();
-//
-//		} catch (Exception e) {
-//			e.getMessage();
-//		}
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			Pane pane = loader.load();
+
+			SellerFromController controller = loader.getController();
+			controller.setSeller(obj);
+			controller.subscribeDataChangeListeners(this);
+			controller.setService(new SellerService(), new DepartmentService());
+			controller.loadAssociatedObjects();
+			controller.updateFormData();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Enter Seller data");
+			dialogStage.setScene(new Scene(pane));
+			dialogStage.setResizable(false);
+			dialogStage.initOwner(prentStage);
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.showAndWait();
+
+		} catch (Exception e) {
+			e.getMessage();
+		}
 
 	}
 
@@ -143,12 +162,10 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 		});
 	}
-
 	private void initRemoveButtons() {
 		tableColumnREMOVE.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnREMOVE.setCellFactory(param -> new TableCell<Seller, Seller>() {
 			private final Button button = new Button("remove");
-
 			@Override
 			protected void updateItem(Seller obj, boolean empty) {
 				super.updateItem(obj, empty);
@@ -163,8 +180,9 @@ public class SellerListController implements Initializable, DataChangeListener {
 			}
 
 		});
+		
 	}
-
+		
 	private void romoveEntity(Seller obj) {
 		Optional<ButtonType> result = Alerts.ShowConfirmaton("Confirmation", "Are you sure to delete?");
 
