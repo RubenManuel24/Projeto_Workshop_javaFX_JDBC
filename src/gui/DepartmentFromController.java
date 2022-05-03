@@ -41,7 +41,7 @@ public class DepartmentFromController implements Initializable{
 	private Button btSave;
 	
 	@FXML
-	private Button btName;
+	private Button btCancel;
 	
 	@FXML
 	public void onButtonSaveAction(ActionEvent event) {

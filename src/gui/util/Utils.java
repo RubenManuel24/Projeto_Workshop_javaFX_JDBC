@@ -24,12 +24,26 @@ public class Utils {
 
 		try {
 			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
+		} 
+		catch (NumberFormatException e) {
 
 			return null;
 		}
 
 	}
+	
+	public static Double tryParseDouble(String str2) {
+
+		try {
+			return Double.parseDouble(str2);
+		} 
+		catch (NumberFormatException e) {
+
+			return null;
+		}
+
+	}
+
 
 	public static <T> Date formatTableColumnDate(TableColumn<T, Date> tableColumn, String format) {
 		tableColumn.setCellFactory(column -> {
